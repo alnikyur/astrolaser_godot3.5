@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/asteroid_destroy.mp3-17a67215b61984651c4f142a19e30a18.mp3str"
+
+[deps]
+
+source_file="res://assets/sound/asteroid_destroy.mp3"
+dest_files=[ "res://.import/asteroid_destroy.mp3-17a67215b61984651c4f142a19e30a18.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
