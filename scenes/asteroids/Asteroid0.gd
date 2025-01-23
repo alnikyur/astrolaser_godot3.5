@@ -2,10 +2,10 @@ extends RigidBody2D
 
 export var screen_width: int = 640
 export var screen_height: int = 480
-export var min_speed: float = 150.0
-export var max_speed: float = 250.0
-export var min_angle: float = -PI
-export var max_angle: float = PI
+export var min_speed: float = 50.0
+export var max_speed: float = 150.0
+export var min_angle: float = PI / 4
+export var max_angle: float = 3 * PI / 4
 export var min_rotation_speed: float = 5
 export var max_rotation_speed: float = 20
 

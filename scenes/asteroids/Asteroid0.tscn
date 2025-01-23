@@ -9,12 +9,11 @@
 radius = 24.0
 
 [node name="Asteroid0" type="RigidBody2D" groups=["asteroids"]]
+gravity_scale = 0.0
 continuous_cd = 1
 contacts_reported = 10
 contact_monitor = true
 script = ExtResource( 2 )
-min_speed = 100.0
-max_speed = 150.0
 max_rotation_speed = 10.0
 
 [node name="AsteroidBrown" type="Sprite" parent="."]
