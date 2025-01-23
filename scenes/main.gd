@@ -25,9 +25,9 @@ func _ready():
 	$Timer.wait_time = spawn_interval
 	$Timer.start()
 
-#	fade_text_in()
-#	yield(get_tree().create_timer(5.0), "timeout")
-#	fade_text_out()
+	fade_text_in()
+	yield(get_tree().create_timer(5.0), "timeout")
+	fade_text_out()
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -95,7 +95,7 @@ func fade_text_out():
 
 func _on_health_point_timer_timeout():
 	for i in range(health_point):
-		var health_point = HealthPoint.instantiate()
+		var health_point = HealthPoint.instance()
 		add_child(health_point)
 		
 		var x_position = rand_range(-400, screen_width)

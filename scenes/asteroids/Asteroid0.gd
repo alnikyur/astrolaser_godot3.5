@@ -8,8 +8,9 @@ export var min_angle: float = -PI
 export var max_angle: float = PI
 export var min_rotation_speed: float = 5
 export var max_rotation_speed: float = 20
+
 onready var explosion_particles = $Particles
-onready var explosion = $AsudioExplosion
+onready var explosion = $AudioExplosion
 
 signal asteroid_destroyed(amount)
 signal asteroid_count(amount)
@@ -36,6 +37,7 @@ func _physics_process(delta):
 func _on_Asteroid0_body_entered(body):
 	if body.is_in_group("lasers"):
 		emit_signal("asteroid_destroyed", 3)
+		emit_signal("asteroid_count", 2)
 		print("Signal 'asteroid_count' emitted.")
 		set_deferred("freeze", true)
 		$AsteroidBrown.visible = false

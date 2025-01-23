@@ -13,8 +13,9 @@ export var friction = 400.0
 
 export var max_health: int = 100  # Максимальное здоровье
 export var health_bar_path: NodePath  # Путь к шкале здоровья
-var current_health: int = max_health  # Текущее здоровье
 
+var current_health: int = max_health  # Текущее здоровье
+var velocity = Vector2.ZERO
 
 
 var max_fire_count = 100
@@ -31,9 +32,6 @@ func _on_node_added(node):
 	if node.is_in_group("asteroids"):
 		node.connect("asteroid_destroyed", self, "add_shots_on_asteroid_destruction")
 		node.connect("asteroid_count", self, "add_score_count")
-
-
-var velocity = Vector2.ZERO  # Хранит текущую скорость корабля
 
 func _process(delta):
 	var input_direction = Vector2.ZERO
@@ -57,7 +55,7 @@ func _process(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 	move_and_slide(velocity)
 
-	if Input.is_action_just_pressed("ui_select") or Input.is_action_just_pressed("joy_fire"):
+	if Input.is_action_just_pressed("ui_select"):
 		fire()
 
 func fire():
@@ -83,13 +81,13 @@ func fire():
 
 			if num_lasers >= 2:
 				var left_fire = Fire.instance()
-				left_fire.position = position + Vector2(320, 400)
+				left_fire.position = position + Vector2(300, 370)
 				left_fire.add_to_group("lasers")  # Добавляем лазер в группу
 				get_parent().add_child(left_fire)
 
 			if num_lasers >= 2:
 				var right_fire = Fire.instance()
-				right_fire.position = position + Vector2(320, 400)
+				right_fire.position = position + Vector2(340, 370)
 				right_fire.add_to_group("lasers")  # Добавляем лазер в группу
 				get_parent().add_child(right_fire)
 
@@ -99,8 +97,6 @@ func fire():
 			laser_empty.play()
 	else:
 		print("Cannot shoot: lasers still on screen!")
-
-
 
 func update_shots_label():
 	shoot_count.text = "Shots: %d" % current_fire_count
