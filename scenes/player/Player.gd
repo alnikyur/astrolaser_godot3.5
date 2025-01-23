@@ -7,9 +7,9 @@ onready var laser_empty = $LaserEmpty
 onready var shoot_count = $"../Score"
 onready var score = $"../Shoots"
 
-export var acceleration = 20000.0
-export var max_speed = 20000.0
-export var friction = 600.0
+export var acceleration = 300.0
+export var max_speed = 300.0
+export var friction = 400.0
 
 export var max_health: int = 100  # Максимальное здоровье
 export var health_bar_path: NodePath  # Путь к шкале здоровья
@@ -33,15 +33,16 @@ func _on_node_added(node):
 		node.connect("asteroid_count", self, "add_score_count")
 
 
+var velocity = Vector2.ZERO  # Хранит текущую скорость корабля
+
 func _process(delta):
 	var input_direction = Vector2.ZERO
 
 	# Keyboard input support
 	if Input.is_action_pressed("ui_left"):
 		input_direction.x -= 1
-	elif Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("ui_right"):
 		input_direction.x += 1
-
 	if Input.is_action_pressed("ui_up"):
 		input_direction.y -= 1
 	if Input.is_action_pressed("ui_down"):
@@ -49,13 +50,14 @@ func _process(delta):
 
 	input_direction = input_direction.normalized()
 
-	# Apply acceleration and friction
-	var velocity = input_direction * acceleration * delta
-	velocity = velocity.clamped(max_speed)
-
-	# Apply movement
+	velocity += input_direction * acceleration * delta
+	if velocity.length() > max_speed:
+		velocity = velocity.normalized() * max_speed
+	if input_direction == Vector2.ZERO:
+		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 	move_and_slide(velocity)
-	if Input.is_action_just_pressed("ui_select"):
+
+	if Input.is_action_just_pressed("ui_select") or Input.is_action_just_pressed("joy_fire"):
 		fire()
 
 func fire():

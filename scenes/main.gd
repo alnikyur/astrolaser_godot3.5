@@ -20,6 +20,7 @@ var is_paused = false
 var score: int = 10
 
 func _ready():
+	Engine.target_fps = 60
 	randomize()
 	$Timer.wait_time = spawn_interval
 	$Timer.start()
@@ -56,12 +57,11 @@ func _on_Timer_timeout():
 		var x_position = rand_range(0, screen_width)
 		var y_position = 0
 		asteroid.position = Vector2(x_position, y_position)
-#		print("Asteroid:", asteroid, "Position:", asteroid.position)
 		
 #	for i in range(asteroid_gray_count):
 #		var asteroid_gray = AsteroidGray.instance()
 #		add_child(asteroid_gray)
-#		
+		
 #		var x_position = rand_range(-600, screen_width)
 #		var y_position = -800
 #		asteroid_gray.position = Vector2(x_position, y_position)
@@ -69,7 +69,7 @@ func _on_Timer_timeout():
 #	for i in range(asteroid_big_gray_count):
 #		var asteroid_big_gray = AsteroidBigGray.instance()
 #		add_child(asteroid_big_gray)
-#		
+		
 #		var x_position = rand_range(-600, screen_width)
 #		asteroid_big_gray.position = Vector2(x_position, y_position)
 

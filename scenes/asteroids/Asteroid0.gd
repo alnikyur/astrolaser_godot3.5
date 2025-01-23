@@ -8,11 +8,11 @@ export var min_angle: float = -PI
 export var max_angle: float = PI
 export var min_rotation_speed: float = 5
 export var max_rotation_speed: float = 20
-onready var explosion_particles = $explosion_particles
-onready var explosion = $Explosion
+onready var explosion_particles = $Particles
+onready var explosion = $AsudioExplosion
 
-#signal asteroid_destroyed(amount: int)
-#signal asteroid_count(amount: int)
+signal asteroid_destroyed(amount)
+signal asteroid_count(amount)
 
 func _ready():
 	add_to_group("asteroids")
@@ -34,31 +34,23 @@ func _physics_process(delta):
 
 
 func _on_Asteroid0_body_entered(body):
-	print("Collision detected with: ", body)
 	if body.is_in_group("lasers"):
-		print("Laser hit asteroid!")
-		queue_free()
-		body.queue_free()
-	else:
-		print("Body is not in group 'lasers'.")
+		emit_signal("asteroid_destroyed", 3)
+		print("Signal 'asteroid_count' emitted.")
+		set_deferred("freeze", true)
+		$AsteroidBrown.visible = false
+		explosion_particles.global_position = body.global_position
+		explosion_particles.emitting = true
+		explosion_particles.visible = true
+		if is_instance_valid(body):
+			body.queue_free()
 
-#	if body.is_in_group("lasers"):
-#		emit_signal("asteroid_destroyed", 3)
-##		print("Signal 'asteroid_count' emitted.")
-#		set_deferred("freeze", true)
+		var temp_audio = AudioStreamPlayer.new()
+		temp_audio.stream = explosion.stream
+		get_parent().add_child(temp_audio)
+		temp_audio.play()
+		temp_audio.connect("finished", temp_audio, "queue_free")
 
-#		explosion_particles.global_position = body.global_position
-#		explosion_particles.emitting = true
-#		explosion_particles.visible = true
-#		if is_instance_valid(body):
-#			body.queue_free()
-
-#		var temp_audio = AudioStreamPlayer.new()
-#		temp_audio.stream = explosion.stream
-#		get_parent().add_child(temp_audio)
-#		temp_audio.play()
-#		temp_audio.connect("finished", temp_audio, "queue_free")
-
-#		await get_tree().create_timer(0.7).timeout
-#		if is_instance_valid(self):
-#			queue_free()
+		yield(get_tree().create_timer(0.7), "timeout")
+		if is_instance_valid(self):
+			queue_free()

@@ -9,6 +9,7 @@ export var direction: Vector2 = Vector2(0, -1)
 func _ready():
 	set_deferred("freeze", true)
 	add_to_group("lasers")
+	
 	gravity_scale = 0
 	linear_velocity = direction * speed
 	
