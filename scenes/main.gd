@@ -4,7 +4,7 @@ export var Asteroid: PackedScene
 export var AsteroidGray: PackedScene
 export var AsteroidBigGray: PackedScene
 export var HealthPoint: PackedScene
-export var spawn_interval: float = 1
+export var spawn_interval: float = 2
 export var screen_width: int = 640
 export var screen_height: int = 480
 export var asteroid_count: int = 1
@@ -58,13 +58,13 @@ func _on_Timer_timeout():
 		var y_position = 0
 		asteroid.position = Vector2(x_position, y_position)
 		
-#	for i in range(asteroid_gray_count):
-#		var asteroid_gray = AsteroidGray.instance()
-#		add_child(asteroid_gray)
+	for i in range(asteroid_gray_count):
+		var asteroid_gray = AsteroidGray.instance()
+		add_child(asteroid_gray)
 		
-#		var x_position = rand_range(-600, screen_width)
-#		var y_position = -800
-#		asteroid_gray.position = Vector2(x_position, y_position)
+		var x_position = rand_range(0, screen_width)
+		var y_position = 0
+		asteroid_gray.position = Vector2(x_position, y_position)
 
 #	for i in range(asteroid_big_gray_count):
 #		var asteroid_big_gray = AsteroidBigGray.instance()

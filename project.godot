@@ -19,6 +19,9 @@ boot_splash/image="res://assets/bootscreen/splash.png"
 window/size/width=640
 window/size/height=480
 window/size/always_on_top=true
+window/vsync/use_vsync=false
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
 
 [global]
 

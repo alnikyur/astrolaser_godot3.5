@@ -34,13 +34,13 @@ func _physics_process(delta):
 	pass
 
 
-func _on_Asteroid0_body_entered(body):
+func _on_Asteroid1_body_entered(body):
 	if body.is_in_group("lasers"):
 		emit_signal("asteroid_destroyed", 3)
 		emit_signal("asteroid_count", 1)
 		print("Signal 'asteroid_count' emitted.")
 		set_deferred("freeze", true)
-		$AsteroidBrown.visible = false
+		$AsteroidGray.visible = false
 		explosion_particles.global_position = body.global_position
 		explosion_particles.emitting = true
 		explosion_particles.visible = true

@@ -9,6 +9,7 @@
 radius = 24.0
 
 [node name="Asteroid0" type="RigidBody2D" groups=["asteroids"]]
+collision_mask = 0
 gravity_scale = 0.0
 continuous_cd = 1
 contacts_reported = 10
