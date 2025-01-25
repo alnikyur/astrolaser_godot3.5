@@ -130,10 +130,14 @@ text = "Shoots:"
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
 [node name="Shoot" parent="Player" index="2"]
-volume_db = -5.0
+volume_db = -10.0
+
+[node name="LaserEmpty" parent="Player" index="3"]
+volume_db = -10.0
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = -10.0
 autoplay = true
 
 [node name="WallLeft" type="StaticBody2D" parent="."]

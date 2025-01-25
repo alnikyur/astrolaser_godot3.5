@@ -29,7 +29,7 @@ shape = SubResource( 1 )
 
 [node name="AudioExplosion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -10.0
+volume_db = -15.0
 
 [connection signal="body_entered" from="." to="." method="_on_Asteroid0_body_entered"]
 

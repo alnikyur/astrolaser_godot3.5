@@ -27,6 +27,7 @@ window/stretch/aspect="expand"
 
 boot=false
 fps=false
+audio=false
 
 [gui]
 

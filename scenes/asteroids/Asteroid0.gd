@@ -49,6 +49,7 @@ func _on_Asteroid0_body_entered(body):
 
 		var temp_audio = AudioStreamPlayer.new()
 		temp_audio.stream = explosion.stream
+		temp_audio.volume_db = -10
 		get_parent().add_child(temp_audio)
 		temp_audio.play()
 		temp_audio.connect("finished", temp_audio, "queue_free")
